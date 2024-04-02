@@ -1,6 +1,6 @@
 ---
 layout: layouts/single-post.html
-title: "Diving into static site generator: 11ty"
+title: "Why I Chose 11ty"
 date: 2024-03-31
 tags: ["post", "11ty"]
 postID: 1
