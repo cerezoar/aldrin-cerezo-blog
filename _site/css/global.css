@@ -62,7 +62,9 @@ main ul {
     font-size: 0.8rem;
 }
 
-
+main img {
+    width: 100%;
+}
 /* footer */
 footer {    
     max-width: 768px;

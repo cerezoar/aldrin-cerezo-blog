@@ -8,6 +8,8 @@ postID: 1
 
 # {{title}}
 
+![Sample Photo](/assets/images/postID-1.jpg)
+
 I've been trying out a few Static Site Generators (SSGs) for a while now and finally settled with 11ty or spelled-out as Eleventy. Here are some of my consideration in choosing it to create simple websites using Nunjucks as my templating language.
 
 ### Why I chose Eleventy?
