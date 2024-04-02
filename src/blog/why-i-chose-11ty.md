@@ -1,7 +1,7 @@
 ---
 layout: layouts/single-post.html
 title: "Why I Chose 11ty"
-date: 2024-03-31
+date: 2024-04-01
 tags: ["post", "11ty"]
 postID: 1
 ---

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/global.css">
+    <title>Aldrin Cerezo | Adding CLI functionality for your Python script using Typer </title>
+</head>
+
+<body>
+    <header>
+        <div class="header-profile">
+    <img src="/assets/images/aldrin.png" alt="Aldrin Cerezo">
+    <a href="/">Aldrin Cerezo</a>
+</div>
+<nav>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+    </ul>
+</nav>
+    </header>
+    <main>
+        <h1>Adding CLI functionality for your Python script using Typer</h1>
+<p><img src="/assets/images/postID-2-01.png" alt=""></p>
+<p>Command line interface (CLI) tools are programs that can be executed from a terminal or a shell, and allow users to interact with the system or other applications through text commands and arguments. CLI tools are useful for automation, scripting, testing, and performing various tasks without a graphical user interface.</p>
+<p>However, writing CLI tools in Python can be challenging and tedious, especially when dealing with complex arguments, options, help messages, and error handling. Fortunately, Python saves the date. In this case, we will use Python programming language to easily create CLI tools using the library typer. Typer is a library for building powerful and elegant CLI tools in the easiest way possible.</p>
+<p>Below are the features and benefits of using typer in creating your CLI tools:</p>
+<ul>
+<li>Intuitive to write: Typer uses type hints to declare the parameters and options of the CLI tool, and automatically infers the type, name, and help message of each argument.</li>
+<li>Easy to use: Typer generates automatic help and automatic completion for all the shells, making it easy for the users to learn and use the CLI tool. Typer also handles errors and validations gracefully and displays informative and colorful messages on the terminal.</li>
+<li>Short and expressive: Typer minimizes code duplication and boilerplate and allows multiple features from each parameter declaration.</li>
+<li>Flexible and extensible: Typer is compatible with Click and can use any of its features and plugins, however, for this case, we will only be exploring using flags.</li>
+</ul>
+<h3>Installation</h3>
+<p>To install Typer, we need to have Python 3.6 or higher installed on our system. We can use pip to install Typer and its optional dependencies, such as Rich, a library for displaying rich and beautiful output on the terminal. To install Typer with all the optional dependencies, we can run the following command:</p>
+<p><code>pip install typer</code></p>
+<h3>Creating a simple Typer app</h3>
+<p>To create a Typer app, we need to import Typer and create an instance of the Typer class. This instance will be our main app, and we can use it to define the commands and options of our CLI tool. For example, we can create a file called hello.py with the following code:</p>
+<pre><code>import typer
+
+app = typer.Typer()
+</code></pre>
+<h3>Defining a command</h3>
+<p>To define a command for our Typer app, we can use the app.command() decorator on a function. The function name will be the name of the command, and the function parameters will be the arguments and options of the command. We can use type hints to specify the type of each parameter, and Typer will automatically infer the name and help message of each argument. For example, we can define a function called hello_user to print a basic command “hello there” to an argument called user.</p>
+<pre><code>import typer
+
+app = typer.Typer()
+
+@app.command()
+def hello_user(user: str ):
+print(&quot;Hello there&quot;, user)
+
+if **name** == &quot;**main**&quot;:
+app()
+</code></pre>
+<p>To run the python script:</p>
+<p><code>python hello.py</code></p>
+<p>This will show an error since an argument is required in the function <code>hello_user</code>.</p>
+<p><img src="/assets/images/postID-2-02.png" alt="">
+Error from the python file</p>
+<p>Automatically, the typer library creates a help functionality on your program and guides the user on how to access or use your script and also on how to use the <code>--help</code> flag. If the user of the script will use the <code>--help</code> flag, this will use a detailed way on how to use the python script or program that you have created.</p>
+<p><img src="/assets/images/postID-2-03.png" alt="">
+Output from running the — help flag</p>
+<p>Now, by following the <code>--help</code> flag command and running the script python <code>hello.py User</code>, it will output the <code>Hello there, User</code> in the terminal.</p>
+<p>Here’s a sample implementation on the deletion of files and folder script that I created in an earlier post.</p>
+<pre><code>import os
+import time
+import typer
+import shutil
+
+app = typer.Typer()
+
+@app.command()
+def del_downloads(days_old: int = 100):
+file_count = 0
+folder_count = 0
+
+    user = os.getlogin()
+    now = time.time()
+    folder_path = f'C:/Users/{user}/Downloads/'
+
+    for item in os.listdir(folder_path):
+        item_path = os.path.join(folder_path, item)
+        item_modified_time = os.stat(item_path).st_mtime
+        if item_modified_time &lt; now - (days_old * 86400):
+            if os.path.isfile(item_path):
+                os.remove(item_path)
+                file_count += 1
+                print(f&quot;Deleted file: {item}&quot;)
+            elif os.path.isdir(item_path):
+                shutil.rmtree(item_path)
+                folder_count += 1
+                print(f&quot;Deleted folder: {item}&quot;)
+    print(&quot;\n___Files and Folders Deletion Summary___\n&quot;)
+    print(f&quot;Deleted files count: {file_count}&quot;)
+    print(f&quot;Deleted folder count: {folder_count}\n&quot;)
+
+if **name** == &quot;**main**&quot;:
+    app()
+</code></pre>
+<p>The code above has a default argument of 100 days so I can run as <code>python &lt;name of the file&gt;</code> and it will run in the default argument. However, if I want to specify the --days-old of the files that will be deleted, it goes like this <code>python &lt;name of the file&gt; --days-old &lt;argument&gt;</code>.</p>
+<p>That’s it for this simple tutorial and have fun with the typer library/module. Let me know what scripts or programs you want to implement using this library.</p>
+<p>Cheers!</p>
+
+    </main>
+    <footer>
+        <hr>
+<p><a href="/">Aldrin Cerezo</a> &copy; 2024. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
